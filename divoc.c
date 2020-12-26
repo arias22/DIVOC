@@ -13,45 +13,35 @@
 #define Car_Caja '-'
 #define Aplicacion "DIVOC_"
 
-int p_init(struct unPaciente *tabla,int *numero);
-//HOA
 
 
-
-
-int p_init (struct unPaciente *tabla, int *numero) {
-  int edad;
-  *numero = 0;
-  edad = get_integer("Date");
-  while (edad!=1) {
-    tabla[*numero].edad= edad;
-    get_string ("Name",tabla[*numero].nombre);
-    (*numero)++;
-    edad = get_integer("Date");  }
-  return 0;
-}
-
-
-/////////////////////////////////////////////////CUERPO
 
  
 int main (){
-
-  struct unPaciente losPacientes[100];
-  int numPacientes;
-  p_init(losPacientes,&numPacientes);
+  //DECLARAMOS EL PRIMER NODO DE LA LISTA
+  PaPaciente head;
+  //Declaramos un fichero que abre patients.txt solo para leerlo
+  FILE *fichero;
+  char c;
+  fichero=fopen("patients.txt","r");
+  //SI EL FICHERO NO EXISTE PASAMOS Y NO CREAMOS LA LISTA
+  if(fichero!=NULL){
+    //SI EL FICHERO ESTA VACIO NO CREAMOS LA LISTA
+    if((c=fgetc(fichero))!=EOF){
+      rewind(fichero);
+    head = Crealista(fichero);  
+    }}
 
   
- 
-  //variable para cuerpo:
-  int k=0;
-  char eleccion;
- 
+  //fprintf(stdout,"%c\n",head->sig->sympton);
+  
+  //CARATULA DEL PROGRAMA
   stripe(Car_Caja,Tam_Linea);
   headline("DIVOC_",'|',Tam_Linea);
   stripe(Car_Caja,Tam_Linea);
-   
- 
+  //FIN DE LA CARATULA   
+  int k=0;
+  char eleccion;
   do{
 
     fprintf (stdout, "R) Register a patient\nS) Search for a patient\nD) Discharge a patient\nL) List patients by age\nP) Mark Positive\n\nX) Exit the program\n\n\n");
@@ -60,19 +50,19 @@ int main (){
 
     switch(toupper(eleccion)){
     case P_Register:
-      p_register();
+       p_register();
       break;
     case P_Search:
-      p_search();
+      // p_search();
       break;
     case P_Discharge:
-      p_discharge();
+      //p_discharge();
       break;
     case P_List:
-      p_list(losPacientes,numPacientes);
+      // p_list(losPacientes,numPacientes);
       break;
     case P_Exit:
-      k=yes_no();
+      // k=yes_no();
       break;
  
     }}while(k==0);

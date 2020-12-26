@@ -1,4 +1,5 @@
 #include "inout.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -6,30 +7,33 @@
 
 
 
-
-void get_string(char *mensaje,char *la_cadena){
+//FUNCION PARA EL DNI Y EL NOMBRE
+void get_string(char *mensaje,char *la_cadena,int min,int max){
  
   int l;
   char cadena[30];
    do {
-     fprintf (stdout,"%s\n",mensaje);
+     fprintf (stdout,"%s",mensaje);
+     fprintf(stdout," (%d-%d char): ",min,max);
      fscanf(stdin,"%s",cadena);
     
      l = strlen(cadena);
-     if (l>24)
-       fprintf (stdout,"Longitud excesiva\n");
-   } while(l>24);
+     
+     
+   } while(l<min||l>max);
    
    strcpy(la_cadena,cadena);
    return;
  
 }
-int get_integer (char *mensaje){
+//FUNCION PARA LA EDAD
+int get_integer (char *mensaje,int min,int max){
   int numero;
   do {
-    fprintf(stdout,"%s\n",mensaje);
+    fprintf(stdout,"%s",mensaje);
+    fprintf(stdout,"[%d-%d]: ",min,max);
     fscanf(stdin,"%d",&numero);
-  }while((numero<1)||(numero>25));
+  }while((numero<min)||(numero>max));
   return numero;
 }
 
@@ -54,15 +58,41 @@ void headline (char palabra[],char signo,int Tam_Linea){
   return;
    
 }
-int yes_no(){
+int yes_no(char *cadena){
+ 
+
   char opcion;
   do {
     
-    fprintf(stdout,"Are you sure you want to exitthe program? (y/n): ");
+    fprintf(stdout,"%s",cadena);
     fscanf(stdin," %c",&opcion);
     if(toupper(opcion)=='Y')return 1;
     else if (toupper(opcion)=='N')
-    return 0;
+      return 0;
   }while((toupper(opcion)!= 'Y' || toupper(opcion)!= 'N'));
 
 }
+int verify_DNI(char *DNI){
+
+  int i;
+  char num[8];
+  int nums;
+  int indice;
+  char palabra[23]={"TRWAGMYFPDXBNJZSQVHLCKE"};
+  int j=0;
+  //CON ESTE FOR SEPARAMOS LOS NUMEROS DE LA LETRA DEL DNI Y LOS COLOCAMOS EN NUM
+  for(i=0;i<8;i++){
+    num[j]=*(DNI+i);
+    j++;
+  }
+  //CONVERTIMOS LA CADENA NUM EN UN ENTERO
+  nums=atoi(num);
+  indice=nums%23;
+  
+  if(*(DNI+8)==*(palabra+indice))return 1;
+  else
+    return 0;
+
+  
+}
+  

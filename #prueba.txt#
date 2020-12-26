@@ -1,0 +1,16 @@
+#include
+
+int main (){
+  //DECLARAMOS EL PRIMER NODO DE LA LISTA
+  PaPaciente head;
+  //Declaramos un fichero que abre patients.txt solo para leerlo
+  FILE *fichero;
+  char c;
+  fichero=fopen("patients.txt","r");
+  //SI EL FICHERO NO EXISTE PASAMOS Y NO CREAMOS LA LISTA
+  if(fichero!=NULL){
+    //SI EL FICHERO ESTA VACIO NO CREAMOS LA LISTA
+    if((c=fgetc(fichero))!=EOF){
+      rewind(fichero);
+    head = Crealista(fichero);  
+    }}
