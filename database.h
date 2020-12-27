@@ -17,7 +17,10 @@ PaPaciente p_register(PaPaciente);
 int p_search(PaPaciente);
 PaPaciente p_discharge(PaPaciente);
 int p_list(PaPaciente);
+int p_mark(PaPaciente);
 void display_patient(PaPaciente);
 PaPaciente Busca_paciente(char*,PaPaciente);
 PaPaciente Elimina_paciente(char*,PaPaciente);
 void Imprime_pacientes(PaPaciente,int);
+void Busca_positivos(PaPaciente);
+

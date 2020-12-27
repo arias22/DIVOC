@@ -131,6 +131,18 @@ int p_list(PaPaciente phead){
  
   return 0;
   }
+//FUNCION PARA MARCAR POSITIVOS
+
+int p_mark(PaPaciente phead){
+  fprintf(stdout,"Postives\n");
+  if(phead==NULL){fprintf(stdout,"No patients yet");return -1;}
+  fprintf(stdout,"Postive patients:\n");
+  
+  Busca_positivos(phead);
+  return 0;
+}
+
+
 //FUNCION PARA INSERTAR PACIENTES
 PaPaciente InsertaPaciente(char *nombre,int edad,char *DNI,int fever,int cough,char sympton,PaPaciente head){
   //CREAMOS UN NODO CON LAS CARACTERISTICAS DADAS
@@ -192,13 +204,25 @@ PaPaciente Elimina_paciente(char *DNI,PaPaciente phead){
       }
   return phead;
 }
-
+//FUNCION PARA IMPRIMIR LOS PACIENTES MENORES QUE FECHA
  void Imprime_pacientes(PaPaciente phead,int fecha){
    while(phead!=NULL){
      if(phead->edad<=fecha)display_patient(phead);
      phead=phead->sig;
    }
  }
+//FUNCION PARA BUSCAR E IMPRIMIR POSITIVOS
+void Busca_positivos(PaPaciente phead){
+  while(phead!=NULL){
+    if(phead->fever==1){
+      if(phead->cough==1){
+	if(phead->sympton!='N'){
+	  display_patient(phead);
+	    }}}
+    phead=phead->sig;
+  }
+  return ;
+}
 					   
   
   

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-
+#define P_Positive 'P'
 #define P_Exit 'X'
 #define P_Search 'S'
 #define P_Discharge 'D'
@@ -58,8 +58,10 @@ int main (){
      head =  p_discharge(head);
       break;
     case P_List:
-     
       p_list(head);
+      break;
+    case P_Positive:
+      p_mark(head);
       break;
     case P_Exit:
       fprintf(stdout,"Exit\n\n");
