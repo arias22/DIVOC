@@ -64,8 +64,8 @@ int main (){
       p_mark(head);
       break;
     case P_Exit:
-      fprintf(stdout,"Exit\n\n");
-       k=yes_no("Are you sure you want to exit the program? (y/n): ");
+      fprintf(stdout,"Exit\n");
+      k= p_exit(fichero,head);
       break;
  
     }}while(k==0);

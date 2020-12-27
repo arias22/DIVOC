@@ -113,10 +113,7 @@ PaPaciente p_discharge(PaPaciente phead){
       fprintf(stdout,"Discharged patient\n");
       return phead;
 
-  
- }
-}
-
+    }}
 
 //FUNCION PARA MOSTRAR LOS PACIENTES DE UNA DETERMINADA EDAD
 int p_list(PaPaciente phead){
@@ -142,7 +139,19 @@ int p_mark(PaPaciente phead){
   return 0;
 }
 
-
+//FUNCION PARA SALIR DE PROGRAMA Y SOBREEESCRIBIR EL FICHERO
+ int p_exit(FILE *fichero,PaPaciente phead){
+   int k;
+   k=yes_no("Are you sure you want to exit the program? (y/n)");
+   if(k==0)return 0;
+   else{
+     fclose(fichero);
+     fichero = fopen("patients.txt","w");
+     Imprime_fichero(fichero,phead);
+     fclose(fichero);
+     return 1;
+   }}
+   
 //FUNCION PARA INSERTAR PACIENTES
 PaPaciente InsertaPaciente(char *nombre,int edad,char *DNI,int fever,int cough,char sympton,PaPaciente head){
   //CREAMOS UN NODO CON LAS CARACTERISTICAS DADAS
@@ -223,6 +232,27 @@ void Busca_positivos(PaPaciente phead){
   }
   return ;
 }
+//FUNCION QUE IMPRIME LA TABLA DE PACIENTES EN EL FICHERO
+ void Imprime_fichero(FILE *fichero,PaPaciente phead){
+   while(phead!=NULL){
+     fputs(phead->nombre,fichero);
+     fprintf(fichero," ");
+     fputs(phead->DNI,fichero);
+     fprintf(fichero," ");
+     fprintf(fichero,"%d ",phead->edad);
+     fprintf(fichero,"%d ",phead->fever);
+     fprintf(fichero,"%d ",phead->cough);
+     fprintf(fichero,"%c\n",phead->sympton);
+
+     phead=phead->sig;
+   }
+ }
+     
+
+     
+     
+   
+   
 					   
   
   

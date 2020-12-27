@@ -18,9 +18,11 @@ int p_search(PaPaciente);
 PaPaciente p_discharge(PaPaciente);
 int p_list(PaPaciente);
 int p_mark(PaPaciente);
+int p_exit(FILE*,PaPaciente);
 void display_patient(PaPaciente);
 PaPaciente Busca_paciente(char*,PaPaciente);
 PaPaciente Elimina_paciente(char*,PaPaciente);
 void Imprime_pacientes(PaPaciente,int);
 void Busca_positivos(PaPaciente);
+void Imprime_fichero(FILE*,PaPaciente);
 
