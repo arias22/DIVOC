@@ -12,9 +12,10 @@ typedef struct unPaciente Paciente;
 typedef struct unPaciente * PaPaciente;
 PaPaciente Creanodo(char*,int,char*,int,int,char);
 PaPaciente Crealista(FILE*);
-PaPaciente InsertaPaciente();
-int p_register();
+PaPaciente InsertaPaciente(char*,int,char*,int,int,char,PaPaciente);
+PaPaciente p_register(PaPaciente);
 int p_search();
 int p_discharge();
 int p_list(PaPaciente,int);
+void display_patient(PaPaciente);
 

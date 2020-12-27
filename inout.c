@@ -36,7 +36,7 @@ int get_integer (char *mensaje,int min,int max){
   }while((numero<min)||(numero>max));
   return numero;
 }
-
+//FUNCIONES CABECERA !!!!!!!!!
 void stripe(char signo,int Tam_Linea){
   int i;
   for(i=0;i<Tam_Linea;i++)fprintf(stdout,"%c",signo);
@@ -58,6 +58,8 @@ void headline (char palabra[],char signo,int Tam_Linea){
   return;
    
 }
+
+//FUNCION PARA COSAS DE SI O NO
 int yes_no(char *cadena){
  
 
@@ -72,6 +74,7 @@ int yes_no(char *cadena){
   }while((toupper(opcion)!= 'Y' || toupper(opcion)!= 'N'));
 
 }
+//FUNCION PARA VERIFICAR DNI
 int verify_DNI(char *DNI){
 
   int i;
@@ -92,7 +95,27 @@ int verify_DNI(char *DNI){
   if(*(DNI+8)==*(palabra+indice))return 1;
   else
     return 0;
-
-  
 }
+//FUNCION PARA VERIFICAR CARACTERES
+char get_character(char *cadena,char *invitacion){
+  char caracter;
+  char recadena[10];
+  int i=0;
+  
+  //CON
+  do{
+    
+    fprintf(stdout,"%s %s: ",invitacion,cadena);
+    
+    fgets(recadena,15,stdin);
+    caracter=toupper(*(recadena));
+
+
+  }while(strchr(cadena,caracter)==NULL||strlen(recadena)>2);
+
+  return toupper(caracter);
+}
+
+
+
   

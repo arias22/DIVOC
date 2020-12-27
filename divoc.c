@@ -33,7 +33,7 @@ int main (){
     }}
 
   
-  //fprintf(stdout,"%c\n",head->sig->sympton);
+
   
   //CARATULA DEL PROGRAMA
   stripe(Car_Caja,Tam_Linea);
@@ -45,12 +45,11 @@ int main (){
   do{
 
     fprintf (stdout, "R) Register a patient\nS) Search for a patient\nD) Discharge a patient\nL) List patients by age\nP) Mark Positive\n\nX) Exit the program\n\n\n");
-    fprintf(stdout,"Choose an option(RSDLPX): ");
-    fscanf(stdin," %c",&eleccion);
+    eleccion=get_character("(RSDLPX)","Choose an option");
 
     switch(toupper(eleccion)){
     case P_Register:
-       p_register();
+       head=p_register(head);
       break;
     case P_Search:
       // p_search();
@@ -59,10 +58,13 @@ int main (){
       //p_discharge();
       break;
     case P_List:
+      fprintf(stdout,"%s\n",head->nombre);
+      fprintf(stdout,"%s\n",head->DNI);
       // p_list(losPacientes,numPacientes);
       break;
     case P_Exit:
-      // k=yes_no();
+      fprintf(stdout,"Exit\n\n");
+       k=yes_no("Are you sure you want to exit the program? (y/n): ");
       break;
  
     }}while(k==0);

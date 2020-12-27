@@ -42,7 +42,7 @@ PaPaciente Crealista(FILE *fichero){
   return pIni; 
 }
 //FUNCION DE REGISTRAR PACIENTES
-int p_register(){
+PaPaciente p_register(PaPaciente head){
   fprintf(stdout,"Register\n");
   char nombre[30];
   char DNI[30];
@@ -60,9 +60,19 @@ int p_register(){
   //PEDIMOS LA FIEBRE Y TOS
   fever=yes_no("Fever? (y/n): ");
   cough=yes_no("Cough? (y/n): ");
-  
+  //PEDIMOS QUE ESCOJA OTRO SINTOMA
+  char sintoma;
+  sintoma=get_character("(FSTMN)","Symptom");
 
-  return 0;}
+  //CREAMOS UN NODO CON EL PACIENTE Y LO AÑADIMOS A LA LISTA
+
+  head=InsertaPaciente(nombre,edad,DNI,fever,cough,sintoma,head);
+  fprintf(stdout,"New patient:\n ");
+  display_patient(head);
+
+
+
+  return head;}
 
 
 int p_search(){
@@ -84,3 +94,23 @@ int p_list(PaPaciente tabla, int numero){
     fprintf(stdout,"%s : %d\n",tabla[i].nombre,tabla[i].edad);}
  
   return 0;}
+//FUNCION PARA INSERTAR PACIENTES
+PaPaciente InsertaPaciente(char *nombre,int edad,char *DNI,int fever,int cough,char sympton,PaPaciente head){
+  //CREAMOS UN NODO CON LAS CARACTERISTICAS DADAS
+  PaPaciente pAux;
+  pAux=Creanodo(nombre,edad,DNI,fever,cough,sympton);
+  //SI head ES NULL (NO HABIA PACIENTES EN EL FICHERO) SOLO IGUALAMOS
+  if(head==NULL)head=pAux;
+  if(head!=NULL){
+    pAux->sig=head;
+    head=pAux;}
+  
+  return head;
+}
+//FUNCION PARA ENSEÑAR UN PACIENTE
+void display_patient(PaPaciente phead){
+  fprintf(stdout,">%s;%s;%d;%d;%d;%c;\n",phead->nombre,phead->DNI,phead->edad,phead->fever,phead->cough,phead->sympton);
+  return;
+}
+    
+  
