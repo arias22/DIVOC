@@ -52,7 +52,7 @@ int main (){
        head=p_register(head);
       break;
     case P_Search:
-      // p_search();
+       p_search(head);
       break;
     case P_Discharge:
       //p_discharge();
