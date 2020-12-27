@@ -55,7 +55,7 @@ int main (){
        p_search(head);
       break;
     case P_Discharge:
-      //p_discharge();
+     head =  p_discharge(head);
       break;
     case P_List:
       fprintf(stdout,"%s\n",head->nombre);

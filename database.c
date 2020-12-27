@@ -94,9 +94,28 @@ int p_search(PaPaciente phead){
 
 
 
-int p_discharge(){
+PaPaciente p_discharge(PaPaciente phead){
+  char DNI[9];
+  PaPaciente pAux;
   fprintf(stdout,"Discharge\n");
-  return 0;}
+  //SI LA LISTA ESTA VACIA LO INDICAMOS Y RETORNAMOS NULL
+  if(phead==NULL){fprintf(stdout,"No patients yet\n");return NULL;}
+
+  get_string("DNI",DNI,9,9);
+
+  pAux=Elimina_paciente(DNI,phead);
+
+  if(pAux==NULL){fprintf(stdout,"Unknown patient\n");return phead;}
+
+  else
+    {
+      phead=pAux;
+      fprintf(stdout,"Discharged patient\n");
+      return phead;
+
+  
+ }
+}
 
 
 
@@ -137,4 +156,37 @@ PaPaciente Busca_paciente(char *DNI,PaPaciente phead){
   }
   return NULL;
     }
+//FUNCION QUE ELIMINA UN PACIENTE Y RETORNA LA CABECERA DE LA LISTA
+PaPaciente Elimina_paciente(char *DNI,PaPaciente phead){
+  PaPaciente remove,anterior;
+  //SI EL PRIMER PACIENTE COINCIDE CON EL DNI SE CUMPLE EL PRIMER IF
+  if(strcmp(phead->DNI,DNI)==0)remove=phead;
+  else
+    {
+      anterior = phead;
+      //ESTE SOLO SE CUMPLE SI SOLO HAY UN PACIENTE Y NO COINCIDE CON EL DNI
+      if(anterior->sig==NULL) return NULL;
+      else{
+	while(strcmp(anterior->sig->DNI,DNI)!=0){
+	  anterior=anterior->sig;
+	  //SE CUMPLE SI LLEGAMOS AL FINAL DE LA LISTA Y NO ENCONTRAMOS AL PACIENTE
+	  if(anterior->sig==NULL)return NULL;
+	}
+	remove=anterior->sig;
+      }
+    
+    }
+  //ESTA SOLO SE CUMPLE SI ES EL PRIMER PACIENTE
+  if(remove==phead){
+    phead=phead->sig;
+    free(remove);
+  }
+  else{
+    anterior->sig=remove->sig;
+    free(remove);
+      }
+  return phead;
+}
+    
+  
   
