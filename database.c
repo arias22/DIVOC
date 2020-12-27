@@ -70,13 +70,26 @@ PaPaciente p_register(PaPaciente head){
   fprintf(stdout,"New patient:\n ");
   display_patient(head);
 
-
-
   return head;}
 
-
-int p_search(){
+//FUNCION PARA BUSCAR PACIENTES POR DNI
+int p_search(PaPaciente phead){
+  PaPaciente pAux;
   fprintf(stdout,"Search\n");
+  char DNI[9];
+
+  if(phead==NULL){
+    fprintf(stdout,"No patients yet\n");
+    return -1;
+  }
+  get_string("DNI",DNI,9,9);
+
+  pAux = Busca_paciente(DNI,phead);
+  if(pAux==NULL)fprintf(stdout,"Unknown patient\n");
+  else{
+    fprintf(stdout,"Patient data:\n");
+    display_patient(pAux);}
+  
   return 0;}
 
 
@@ -112,5 +125,16 @@ void display_patient(PaPaciente phead){
   fprintf(stdout,">%s;%s;%d;%d;%d;%c;\n",phead->nombre,phead->DNI,phead->edad,phead->fever,phead->cough,phead->sympton);
   return;
 }
-    
+
+//FUNCION PARA BUSCAR PACIENTES POR DNI
+
+PaPaciente Busca_paciente(char *DNI,PaPaciente phead){
+
+  while(phead!=NULL){
+    if(strcmp(phead->DNI,DNI)==0)return phead;
+    else
+      phead=phead->sig;
+  }
+  return NULL;
+    }
   
