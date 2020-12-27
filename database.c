@@ -93,20 +93,20 @@ int p_search(PaPaciente phead){
   return 0;}
 
 
-
+//FUNCION QUE ELIMINA UN PACIENTE
 PaPaciente p_discharge(PaPaciente phead){
   char DNI[9];
   PaPaciente pAux;
   fprintf(stdout,"Discharge\n");
   //SI LA LISTA ESTA VACIA LO INDICAMOS Y RETORNAMOS NULL
   if(phead==NULL){fprintf(stdout,"No patients yet\n");return NULL;}
-
+  //LE PEDIMOS EL DNI
   get_string("DNI",DNI,9,9);
-
+  //USAMOS LA FUNCION ELMINA
   pAux=Elimina_paciente(DNI,phead);
-
+  //SI NO ENCONTRAMOS EL PACIENTE
   if(pAux==NULL){fprintf(stdout,"Unknown patient\n");return phead;}
-
+  //SI LO ENCONTRAMOS DEVOLVEMOS LA CABECERA
   else
     {
       phead=pAux;
@@ -118,14 +118,19 @@ PaPaciente p_discharge(PaPaciente phead){
 }
 
 
-
-int p_list(PaPaciente tabla, int numero){
-  int i;
-  fprintf(stdout,"Tabla de pacientes:\n");
-  for(i=0;i<numero;i++){
-    fprintf(stdout,"%s : %d\n",tabla[i].nombre,tabla[i].edad);}
+//FUNCION PARA MOSTRAR LOS PACIENTES DE UNA DETERMINADA EDAD
+int p_list(PaPaciente phead){
+  int fecha;
+  fprintf(stdout,"List\n");
+  if(phead==NULL)fprintf(stdout,"No patients yet\n");
+  else{
+   fecha = get_integer("Date",1900,2020);
+   fprintf(stdout,"Patients born before %d:\n",fecha);
+   Imprime_pacientes(phead,fecha);
+  } 
  
-  return 0;}
+  return 0;
+  }
 //FUNCION PARA INSERTAR PACIENTES
 PaPaciente InsertaPaciente(char *nombre,int edad,char *DNI,int fever,int cough,char sympton,PaPaciente head){
   //CREAMOS UN NODO CON LAS CARACTERISTICAS DADAS
@@ -187,6 +192,13 @@ PaPaciente Elimina_paciente(char *DNI,PaPaciente phead){
       }
   return phead;
 }
-    
+
+ void Imprime_pacientes(PaPaciente phead,int fecha){
+   while(phead!=NULL){
+     if(phead->edad<=fecha)display_patient(phead);
+     phead=phead->sig;
+   }
+ }
+					   
   
   

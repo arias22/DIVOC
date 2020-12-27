@@ -58,9 +58,8 @@ int main (){
      head =  p_discharge(head);
       break;
     case P_List:
-      fprintf(stdout,"%s\n",head->nombre);
-      fprintf(stdout,"%s\n",head->DNI);
-      // p_list(losPacientes,numPacientes);
+     
+      p_list(head);
       break;
     case P_Exit:
       fprintf(stdout,"Exit\n\n");
