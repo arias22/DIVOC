@@ -75,7 +75,6 @@ Each line in `patients.txt` is:
 Example:
 
 ```
-Diego 48118916H 2002 0 0 F
 Carlos 44689664C 2002 1 0 T
 Maria 20774973Q 1973 0 1 T
 ```
@@ -92,17 +91,3 @@ Maria 20774973Q 1973 0 1 T
 - **Symptoms**: selected from menu, must be valid.
 - **Names**: up to 24 characters, no spaces.
 
----
-
-## 🧪 Notes & Improvements
-
-- Current year cutoff is 2020 → can be updated to `current_year`.
-- Names don’t allow spaces (improvement: switch to `fgets`).
-- Mark Positive is display-only (not stored in struct).
-- `patients.txt` is overwritten on exit.
-
----
-
-## 📜 License
-
-MIT License (add `LICENSE` file if you want this explicitly open-source).
